@@ -81,6 +81,46 @@ apt-get -y install nodejs
 apt-get -y install build-essential
 rm ./nodesource_setup.sh
 
+
+# ------------------------------------------------------------------------------
+# Testing
+# ------------------------------------------------------------------------------
+npm install -g mocha
+npm install -g chai
+npm install -g chai-http
+
+
+# ------------------------------------------------------------------------------
+# MongoDB
+# ------------------------------------------------------------------------------
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" |  tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
+apt-get update
+apt-get install -y mongodb-org
+apt-get install -y mongodb-org
+service mongod start
+
+
+
+# ------------------------------------------------------------------------------
+# MySql
+# ------------------------------------------------------------------------------
+apt-get install -y mysql-server
+apt-get install -y mysql
+
+# ---- open ports
+#iptables -I INPUT -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
+#iptables -I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT
+
+service mysql start
+/usr/sbin/update-rc.d mysql defaults
+
+/usr/bin/mysql -u root -p < echo "UPDATE mysql.user SET Password = PASSWORD('mys092500') WHERE User = 'root'; FLUSH PRIVILEGES;"
+
+
+
+
 # ------------------------------------------------------------------------------
 # Wkhtmltopdf
 #

@@ -10,7 +10,7 @@
 
 FROM mtmacdonald/docker-base:1.1.2
 
-MAINTAINER Mark Macdonald <mark.t.macdonald@googlemail.com>
+MAINTAINER Nick Mitchell <nick@kitset.io>
 
 # Use Supervisor to run and manage all other services
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
