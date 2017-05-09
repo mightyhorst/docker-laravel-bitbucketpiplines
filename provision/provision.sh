@@ -120,6 +120,26 @@ service mysql start
 
 
 
+# ------------------------------------------------------------------------------
+# Microservices to run 
+# ------------------------------------------------------------------------------
+apt-get install -y git
+mkdir ~/microservices
+mkdir ~/gw
+
+cd ~/microservices
+git clone https://superlogical:bit092500@bitbucket.org/rock_ai/microservice_api.git
+cd microservice_api
+composer install 
+php artisan migrate
+php artisan db:all 
+php artisan serve --port=7003
+
+
+
+
+
+
 
 # ------------------------------------------------------------------------------
 # Wkhtmltopdf
